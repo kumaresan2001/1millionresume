@@ -5,57 +5,43 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-// import { API } from "./global";
+import { API } from "./global";
+
 export function Resume() {
   const [education, setEducation] = useState([]);
   const [workExperience, setWorkExperience] = useState([]);
   const [workExperienceColor, setWorkExperienceColor] = useState("white");
 
-  // const[resume,setResume]=useState([])
-  // const Fetch=()=>{
-  //   return axiox.get(API).then((res)=>setResume(res.resume))
-  // }
-
   useEffect(() => {
-    // Fetch()
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${API}/resume`);
+        const data = await response.json();
 
-    setEducation([
-      {
-        id: "1",
-        degree: "Bachelor of Science in Computer Science",
-        college: "University of ABC",
-        location: "Chicago, USA",
-        graduationDate: "May 2019",
-      },
-      {
-        id: "2",
-        degree: "High School Diploma",
-        college: "High School XYZ",
-        location: "Los Angeles, USA",
-        graduationDate: "Jun 2015",
-      },
-      // Add more education data
-    ]);
-    setWorkExperience([
-      {
-        id: "1",
-        position: "Intern",
-        company: "XYZ Corporation",
-        location: "San Francisco, USA",
-        startDate: "May 2019",
-        endDate: "Aug 2019",
-        description: "Assisted with frontend development and bug fixing.",
-      },
-      {
-        id: "2",
-        position: "Software Developer",
-        company: "ABC Tech",
-        location: "New York, USA",
-        startDate: "Jan 2020",
-        endDate: "Present",
-        description: "Developed web applications using React and Node.js.",
-      },
-    ]);
+        if (Array.isArray(data) && data.length > 0) {
+          const educationData = data[0].resume.sections.find(
+            (section) => section.title === "Education"
+          );
+
+          if (educationData) {
+            setEducation(educationData.items);
+          }
+        }
+        if (Array.isArray(data) && data.length > 0) {
+          const workExperienceData = data[0].resume.sections.find(
+            (section) => section.title === "Work Experience"
+          );
+
+          if (workExperienceData) {
+            setWorkExperience(workExperienceData.items);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const onDragEnd = (result) => {
@@ -97,7 +83,7 @@ export function Resume() {
         </span>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="education">
+        <Droppable droppableId="resume">
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               <h2>Education</h2>
