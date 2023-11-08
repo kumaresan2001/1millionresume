@@ -1,0 +1,66 @@
+body{
+    background-color: #f2f4f8;
+}
+  .resume-container {
+    width: 210mm; 
+    height: 290mm; 
+    margin: 0 auto;
+    padding: 20px; 
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+    color: #333;
+    line-height: 1;
+    border: 1px solid #ccc;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    
+    
+  }
+
+.experience-color{
+  text-align: center;
+ 
+ 
+  
+  }
+  h2{
+    text-align: center;
+    font-size: 32px;
+  }
+  .education{ 
+   
+   margin-top: 70px;
+   padding-left: 70px;
+  }
+
+
+  .education__content,
+.experience__content {
+  display: flex;
+}
+
+.education__time,
+.experience__time {
+  padding-right: 1rem;
+}
+   
+  .education__rounder,
+.experience__rounder {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--text-color-light);
+  border-radius: 50%;
+  margin-top: 0.25rem;
+}
+
+.education__line,
+.experience__line {
+  display: block;
+  width: 2px;
+  height: 110%;
+  background-color: var(--text-color-light);
+  transform: translate(7px, 0);
+}
