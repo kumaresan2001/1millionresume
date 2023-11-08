@@ -5,21 +5,20 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+// import { API } from "./global";
 export function Resume() {
   const [education, setEducation] = useState([]);
   const [workExperience, setWorkExperience] = useState([]);
   const [workExperienceColor, setWorkExperienceColor] = useState("white");
 
-  useEffect(() => {
-    // Fetch data from your backend API for Education and Work Experience
-    // Use fetch or Axios to retrieve the data and set the state using setEducation and setWorkExperience
-    // Example:
-    // fetch('api/education')
-    //   .then(response => response.json())
-    //   .then(data => setEducation(data));
-    // Similar fetching for Work Experience
+  // const[resume,setResume]=useState([])
+  // const Fetch=()=>{
+  //   return axiox.get(API).then((res)=>setResume(res.resume))
+  // }
 
-    // Set default data for example
+  useEffect(() => {
+    // Fetch()
+
     setEducation([
       {
         id: "1",
@@ -56,12 +55,10 @@ export function Resume() {
         endDate: "Present",
         description: "Developed web applications using React and Node.js.",
       },
-      // Add more work experience data
     ]);
   }, []);
 
   const onDragEnd = (result) => {
-    // Reorder sections based on drag-and-drop functionality
     if (!result.destination) {
       return;
     }
@@ -71,12 +68,11 @@ export function Resume() {
       // Logic to update the education state
     } else if (result.source.droppableId === "workExperience") {
       // Reorder work experience sections
-      // Logic to update the workExperience state
     }
   };
 
   const handleColorChange = (e) => {
-    setWorkExperienceColor(e.target.value); // Update the color state
+    setWorkExperienceColor(e.target.value);
   };
 
   return (
@@ -105,7 +101,7 @@ export function Resume() {
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               <h2>Education</h2>
-              {/* Map over the education data */}
+
               {education.map((edu, index) => (
                 <Draggable key={edu.id} draggableId={edu.id} index={index}>
                   {(provided) => (
@@ -115,7 +111,9 @@ export function Resume() {
                       {...provided.dragHandleProps}
                     >
                       <div className="education">
-                        <p>{edu.degree}</p>
+                        <h4>
+                          <p>{edu.degree}</p>
+                        </h4>
                         <p>{edu.college}</p>
                         <p>{edu.location}</p>
                         <p>{edu.graduationDate}</p>
@@ -149,7 +147,9 @@ export function Resume() {
                         {...provided.dragHandleProps}
                       >
                         <div className="education">
-                          <p>{exp.position}</p>
+                          <h4>
+                            <p>{exp.position}</p>
+                          </h4>
                           <p>{exp.company}</p>
                           <p>{exp.location}</p>
                           <p>{exp.startDate}</p>
